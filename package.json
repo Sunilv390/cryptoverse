@@ -12,7 +12,7 @@
     "ajv-keywords": "^5.1.0",
     "antd": "^5.20.3",
     "axios": "^1.7.5",
-    "chart.js": "^3.9.1",
+    "chart.js": "^4.4.4",
     "html-react-parser": "^5.1.13",
     "millify": "^6.1.0",
     "moment": "^2.30.1",

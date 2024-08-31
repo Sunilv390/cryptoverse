@@ -324,6 +324,7 @@ a:hover {
 }
 .provider-name {
   margin-left: 10px;
+  font-weight: bold;
 }
 
 .chart-header {

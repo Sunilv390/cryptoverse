@@ -20,8 +20,10 @@ const News = ({ simplified }) => {
     newsCategory,
     count: simplified ? 6 : 12,
   });
-  if (!cryptoNewsResponse?.success) return <Loader />;
-  const cryptoNews = cryptoNewsResponse.data;
+  const cryptoNews = cryptoNewsResponse;
+  console.log(cryptoNews);
+  if (!cryptoNews?.status === "success") return <Loader />;
+
   return (
     <Row gutter={[16, 16]}>
       {!simplified && (
@@ -45,10 +47,10 @@ const News = ({ simplified }) => {
           </Select>
         </Col>
       )}
-      {cryptoNews.map((news, i) => (
+      {cryptoNews?.items.map((news, i) => (
         <Col xs={24} sm={12} md={8} lg={6} key={i}>
           <Card hoverable className="news-card">
-            <a href={news.url} target="_blank" rel="noreferrer">
+            <a href={news?.newsUrl} target="_blank" rel="noreferrer">
               <div className="news-image-container">
                 <Meta
                   className="news-title"
@@ -59,20 +61,17 @@ const News = ({ simplified }) => {
                   }
                 />
                 <img
-                  src={news?.thumbnail || demoImage}
+                  src={news?.images?.thumbnailProxied || demoImage}
                   alt="news"
                   style={{ height: 50, width: 100 }}
                 />
               </div>
               <div className="provider-container">
                 <div>
-                  <Avatar
-                    src={news.source.favicon || demoImage}
-                    alt={news.source.name}
-                  />
-                  <Text className="provider-name">{news.source?.name}</Text>
+                  <Avatar src={demoImage} alt={demoImage} />
+                  <Text className="provider-name">{news?.publisher}</Text>
                 </div>
-                <Text>{moment(news.date).startOf("ss").fromNow()}</Text>
+                {/* <Text>{moment(news?.timestamp).startOf("ss").fromNow()}</Text> */}
               </div>
             </a>
           </Card>

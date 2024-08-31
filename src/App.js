@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { Layout, Typography, Space } from "antd";
 
@@ -11,8 +11,25 @@ import {
   CryptoDetails,
 } from "./components";
 import "./App.css";
+import video from "./images/cryptoVerse.mp4";
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  });
+
+  if (loading) {
+    return (
+      <div className="video-preloder">
+        <video autoPlay muted onEnded={() => setLoading(false)}>
+          <source src={video} type="video/mp4" />
+        </video>
+      </div>
+    );
+  }
   return (
     <div className="app">
       <div className="navbar">
